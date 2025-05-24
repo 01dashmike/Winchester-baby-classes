@@ -2,56 +2,38 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Winchester Baby & Toddler Classes</title>
+  <title>Find Baby & Toddler Classes Near You | Chilton Directory</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <style>
-    body { font-family: Arial, sans-serif; margin: 0; padding: 0; }
-    header { background: #2c3e50; color: white; padding: 1rem; text-align: center; }
-    nav { background: #f0f0f0; padding: 1rem; text-align: center; }
-    nav a { margin: 0 10px; color: #2c3e50; text-decoration: none; }
-    section { padding: 1rem 2rem; }
-    .class-card { background: #fff; padding: 1rem; margin-bottom: 1rem; border-radius: 8px; box-shadow: 0 0 5px rgba(0,0,0,0.1); }
-    .rating { color: #f39c12; }
-    .highlight { background: #fffbea; border: 2px solid #f39c12; }
-    .highlight img { width: 100%; border-radius: 10px; }
+    body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #f5f5f5; color: #333; }
+    header { background: #2c3e50; color: white; padding: 2rem 1rem; text-align: center; }
+    nav { background: #eee; text-align: center; padding: 1rem; }
+    nav a { color: #2c3e50; text-decoration: none; margin: 0 1rem; }
+    .hero { text-align: center; padding: 2rem; }
+    input[type="text"] { padding: 0.5rem; width: 250px; font-size: 1rem; }
+    button { padding: 0.5rem 1rem; background: #f39c12; color: white; border: none; cursor: pointer; font-size: 1rem; }
+    button:hover { background: #e67e22; }
+    .locations { text-align: center; margin-top: 2rem; }
   </style>
 </head>
 <body>
   <header>
-    <h1>Winchester Baby & Toddler Classes</h1>
-    <p>Discover local baby and toddler classes in and around Winchester. Explore paid sensory, music, and adventure classes from trusted providers.</p>
+    <h1>Find Baby & Toddler Classes Near You</h1>
+    <p>Discover sensory play, music, movement, and more for your little ones – locally and nationally</p>
   </header>
   <nav>
-    <a href="index.html">Home</a> |
-    <a href="free-classes.html">Free Classes</a> |
-    <a href="events.html">Local Events</a>
+    <a href="winchester.html">Winchester</a>
+    <a href="andover.html">Andover</a>
   </nav>
-  <section>
-    <div class="class-card highlight">
-      <h2>Baby Sensory Winchester</h2>
-      <img src="baby-sensory-winchester-1.jpg" alt="Baby Sensory" />
-      <p><strong>Why choose Baby Sensory?</strong> Multi-award-winning sensory learning classes designed to support your baby's development from birth onward.</p>
-      <p><strong>Location:</strong> Itchen Abbas, Compton, Weeke</p>
-      <p><strong>Rating:</strong> <span class="rating">★★★★★</span></p>
-      <p><strong>Cost:</strong> Free trial, term pricing varies</p>
-      <p><a href="https://www.babysensory.com/winchester" target="_blank">Visit Website</a></p>
-    </div>
-
-    <div class="class-card">
-      <h2>Bloom Baby Classes Winchester & Andover</h2>
-      <p><strong>Location:</strong> Various venues across Winchester and Andover</p>
-      <p><strong>Rating:</strong> <span class="rating">★★★★★</span></p>
-      <p><strong>Cost:</strong> £7–£9 per class</p>
-      <p><a href="https://bloombabyclasses.com/winchester-and-andover" target="_blank">Visit Website</a></p>
-    </div>
-
-    <div class="class-card">
-      <h2>Toddler Sense Winchester</h2>
-      <p><strong>Location:</strong> Andover</p>
-      <p><strong>Rating:</strong> <span class="rating">★★★★★</span></p>
-      <p><strong>Cost:</strong> From £27 for 3 trial sessions</p>
-      <p><a href="https://www.toddlersense.com/winchester" target="_blank">Visit Website</a></p>
-    </div>
+  <section class="hero">
+    <h2>Enter your postcode to get started</h2>
+    <input type="text" placeholder="e.g. SO23 or NW1" />
+    <button onclick="alert('Postcode search coming soon!')">Search</button>
+  </section>
+  <section class="locations">
+    <p>Or browse by area:</p>
+    <a href="winchester.html">Winchester</a> |
+    <a href="andover.html">Andover</a>
   </section>
 </body>
 </html>
