@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Find Baby & Toddler Classes | Chilton Directory</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    body { font-family: sans-serif; margin: 0; background: #f5f5f5; }
+    header { background: #2c3e50; color: white; padding: 2rem; text-align: center; }
+    .content { padding: 1rem 2rem; }
+    .class-card { background: white; padding: 1rem; border-radius: 8px; margin-bottom: 1rem; box-shadow: 0 0 6px rgba(0,0,0,0.1); }
+    .badge { display: inline-block; background: #f39c12; color: white; padding: 3px 6px; font-size: 0.8rem; border-radius: 5px; margin-right: 5px; }
+    select { padding: 0.5rem; font-size: 1rem; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Find Baby & Toddler Classes Near You</h1>
+    <p>Powered by Chilton Directory | Updated live from our Google Sheet</p>
+  </header>
+  <div class="content">
+    <label for="townSelect">Select your town:</label>
+    <select id="townSelect" onchange="filterByTown()">
+      <option value="all">-- All Towns --</option>
+      <option value="Winchester">Winchester</option>
+      <option value="Andover">Andover</option>
+      <option value="Basingstoke">Basingstoke</option>
+    </select>
+
+    <div id="classList">
+      <!-- Class cards will be inserted here -->
+    </div>
+  </div>
+
+  <script>
+    const SHEET_ID = "REPLACE_WITH_YOUR_SHEET_ID";
+    const SHEET_URL = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&sheet=Classes`;
+
+    async function fetchData() {
+      const res = await fetch(SHEET_URL);
+      const text = await res.text();
+      const json = JSON.parse(text.substr(47).slice(0, -2));
+      return json.table.rows.map(row => ({
+        town: row.c[0]?.v,
+        name: row.c[1]?.v,
+        age: row.c[2]?.v,
+        location: row.c[3]?.v,
+        time: row.c[4]?.v,
+        cost: row.c[5]?.v,
+        link: row.c[6]?.v,
+        tags: row.c[7]?.v
+      }));
+    }
+
+    async function renderClasses() {
+      const data = await fetchData();
+      const container = document.getElementById("classList");
+      container.innerHTML = "";
+      data.forEach(classItem => {
+        const card = document.createElement("div");
+        card.className = "class-card";
+        card.innerHTML = `
+          <h2>${classItem.name}</h2>
+          <p><strong>Location:</strong> ${classItem.location}</p>
+          <p><strong>Age:</strong> ${classItem.age}</p>
+          <p><strong>Time:</strong> ${classItem.time}</p>
+          <p><strong>Cost:</strong> ${classItem.cost}</p>
+          <p><a href="${classItem.link}" target="_blank">Visit Website</a></p>
+          <div>${(classItem.tags || "").split(",").map(tag => `<span class="badge">${tag.trim()}</span>`).join(" ")}</div>
+        `;
+        container.appendChild(card);
+      });
+      window.allClasses = data;
+    }
+
+    function filterByTown() {
+      const selectedTown = document.getElementById("townSelect").value;
+      const filtered = selectedTown === "all" ? window.allClasses : window.allClasses.filter(c => c.town === selectedTown);
+      const container = document.getElementById("classList");
+      container.innerHTML = "";
+      filtered.forEach(classItem => {
+        const card = document.createElement("div");
+        card.className = "class-card";
+        card.innerHTML = `
+          <h2>${classItem.name}</h2>
+          <p><strong>Location:</strong> ${classItem.location}</p>
+          <p><strong>Age:</strong> ${classItem.age}</p>
+          <p><strong>Time:</strong> ${classItem.time}</p>
+          <p><strong>Cost:</strong> ${classItem.cost}</p>
+          <p><a href="${classItem.link}" target="_blank">Visit Website</a></p>
+          <div>${(classItem.tags || "").split(",").map(tag => `<span class="badge">${tag.trim()}</span>`).join(" ")}</div>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    renderClasses();
+  </script>
+</body>
+</html>
